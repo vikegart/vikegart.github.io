@@ -49,6 +49,7 @@ class GameScene {
     if (this.game.checkKeyPress(80)) {
       this.togglePause();
     }
+
     if (!this.isPause) {
       this.lvl = this.kills;
       let player = this.player;
@@ -59,28 +60,17 @@ class GameScene {
           let bullet = this.bullets[j];
           if (isCollade(bullet, enemy)) {
             this.kills += 1;
-            if (j == 0) {
-              this.bullets.shift();
-            }
-            this.bullets.splice(j, j);
-            if (i == 0) {
-              this.enemies.shift();
-            }
-            this.enemies.splice(i, i);
+            this.bullets.splice(j, 1);
+            this.enemies.splice(i, 1);
           }
           if (inFrame.bottomBorder(this.frame, enemy)) {
-            this.enemies.splice(i, i);
-            if (i == 0) {
-              this.enemies.shift();
-            }
+            this.enemies.splice(i, 1);
           }
         }
         if (isCollade(player, enemy)) {
           this.kills += 1;
-          if (i == 0) {
-            this.enemies.shift();
-          }
-          this.enemies.splice(i, i);
+          this.enemies.splice(i, 1);
+          i--;
           player.damage(enemy.lvl);
         }
 
@@ -118,7 +108,7 @@ class GameScene {
       //user controls
       this.game.keys['27'] && this.game.setScene(this.game.MenuScene); // ESC to menu
       if (this.game.checkKeyPress(13)) { //cheatButton (enter)
-        player.health = 5;
+        player.health = 6;
       }
       if (!inFrame.leftBorder(this.frame, player)) {
         this.game.keys['65'] && player.moveLeft(player.speed); // A
@@ -151,10 +141,7 @@ class GameScene {
             bullet.fly(bullet.speed, bullet.direction);
             if (isCollade(player, bullet)) {
               player.damage(bullet.damageVal);
-              this.bullets.splice(i, i);
-              if (i == 0) {
-                this.bullets.shift()
-              }
+              this.bullets.splice(i, 1);
 
               //swithc player costume
               switch (player.health) {
@@ -187,10 +174,7 @@ class GameScene {
               }
             }
           } else {
-            this.bullets.splice(i, i);
-            if (i == 0) {
-              this.bullets.shift()
-            }
+            this.bullets.splice(i, 1);
           }
         }
       }

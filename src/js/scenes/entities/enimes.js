@@ -1,7 +1,7 @@
 class Enemy {
   constructor(game) {
     this.game = game;
-    this.speed = 1;
+    this.speed = 2;
     this.posY = 0;
     this.posX = 0;
     this.img = new Image();

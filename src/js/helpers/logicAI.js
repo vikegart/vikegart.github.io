@@ -10,7 +10,7 @@ var logicAI = {
   },
 
   canIClone(percent) {
-    let percentClone = .008 + (percent / 1000);
+    let percentClone = .007 + (percent / 10000);
     let cloneChance = Math.floor(Math.random() * 1001);
     if (cloneChance / 1000 < percentClone) {
       return true;
@@ -19,9 +19,9 @@ var logicAI = {
   },
 
   canICloneBoss(percent) {
-    let percentBoss = .001 + (percent / 1000);
-    let cloneChance = Math.floor(Math.random() * 1001);
-    if (cloneChance / 1000 < percentBoss) {
+    let percentBoss = .0005 + (percent / 10000);
+    let cloneChance = Math.floor(Math.random() * 10001);
+    if (cloneChance / 10000 < percentBoss) {
       return true;
     }
     return false;
